@@ -40,6 +40,12 @@ INSTALLED_APPS = [
     # 3rd party apps
     "rest_framework", #new
     "corsheaders",
+    "rest_framework.authtoken",#new
+    "allauth",#new
+    "allauth.account",#new
+    "allauth.socialaccount", #new
+    "dj_rest_auth", # new
+    "dj_rest_auth.registration", #new
     # local
     "accounts",
     "posts", 
@@ -48,6 +54,10 @@ INSTALLED_APPS = [
 REST_FRAMEWORK={
     "DEFAULT_PERMISSION_CLASSES":[
         "rest_framework.permissions.IsAuthenticated", #new
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES":[
+        "rest_framework.authentication.SessionAuthentication", 
+        "rest_framework.authentication.TokenAuthentication", #new
     ],
 }
 
@@ -75,6 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "django.template.context_processors.request", #new
             ],
         },
     },
@@ -140,3 +151,5 @@ CORS_ORIGIN_WHITELIST=(
     "http://localhost:8000",
 )
 CSRF_TRUSTED_ORIGINS=["http://localhost:3000"]
+EMAIL_BACKEND="django.core.mail.backends.console.EmailBackend" #new
+SITE_ID= 1 #new
